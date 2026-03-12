@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .login-card {
+            width: 360px;
+            padding: 24px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            border: none;
+            background: #2d6cdf;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .aux-link {
+            margin-top: 12px;
+            display: inline-block;
+            color: #2d6cdf;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .section-title {
+            margin: 16px 0 8px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .msg-error {
+            margin: 8px 0;
+            color: #b3261e;
+            font-size: 13px;
+        }
+
+        .msg-ok {
+            margin: 8px 0;
+            color: #1a7f37;
+            font-size: 13px;
+        }
+
+        .secondary-btn {
+            background: #1f8f5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>LOGIN</h2>
+        <form method="POST">
+            <input type="text" name="nombreusuario" placeholder="Ingrese usuario" required/>
+            <input type="password" name="contrasenia" placeholder="Ingrese contrasenia" required/>
+            <button type="submit">Ingresar</button>
+        </form>
+        {% if login_error %}
+            <p class="msg-error">{{ login_error }}</p>
+        {% endif %}
+        <a class="aux-link" href="{{ url_for('auth.recuperar_password') }}">¿Olvidaste tu contraseña?</a>
+
+        <p class="section-title">¿No tienes cuenta? Regístrate como vendedor</p>
+        <form method="POST" action="{{ url_for('auth.registro') }}">
+            <input type="text" name="nuevo_nombre" placeholder="Nombre de usuario" required/>
+            <input type="email" name="nuevo_email" placeholder="Correo electrónico" required/>
+            <input type="password" name="nuevo_password" placeholder="Contraseña" required/>
+            <input type="password" name="nuevo_password_confirm" placeholder="Confirmar contraseña" required/>
+            <button class="secondary-btn" type="submit">Crear cuenta</button>
+        </form>
+        {% if registro_error %}
+            <p class="msg-error">{{ registro_error }}</p>
+        {% endif %}
+        {% if registro_ok %}
+            <p class="msg-ok">{{ registro_ok }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
