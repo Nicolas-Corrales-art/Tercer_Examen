@@ -1,4 +1,4 @@
-# Reposteria Flask
+#  Flask
 
 Aplicacion web en Flask para la gestion basica de productos, usuarios y ventas, con panel administrativo, autenticacion y soporte de comprobantes PDF.
 
